@@ -33,7 +33,7 @@ class Command {
     const result = spawnSync(cmd, args, {
       stdio: ["inherit", "pipe", "pipe"],
       ...options,
-      env: { ...process.env, ...options.env, PATH: `${BIN_DIR}:${envPath}` },
+      env: { ...process.env, ...options.env, PATH: `${BIN_DIR}${path.delimiter}${envPath}` },
     });
 
     if (result.status !== 0) {
