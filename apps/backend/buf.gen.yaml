@@ -1,0 +1,27 @@
+# 配置protoc生成规则
+version: v2
+
+inputs:
+  - directory: .
+
+managed:
+  enabled: true
+
+  disable:
+    - module: buf.build/googleapis/googleapis
+    - module: "buf.build/envoyproxy/protoc-gen-validate"
+    - module: "buf.build/kratos/apis"
+    - module: "buf.build/gnostic/gnostic"
+    - module: "buf.build/gogo/protobuf"
+
+plugins:
+  # generate go code
+  - local: protoc-gen-go
+    out: .
+    opt: paths=source_relative
+
+  # 额外生成不包含枚举前缀的别名
+  - local: protoc-gen-go-enums
+    out: .
+    opt:
+      - paths=source_relative

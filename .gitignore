@@ -1,38 +1,107 @@
-# Reference https://github.com/github/gitignore/blob/master/Go.gitignore
-# Binaries for programs and plugins
+
+# Go
 *.exe
 *.exe~
 *.dll
-*.dylib
-
-# Test binary, built with `go test -c`
-*.test
-
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
-
-# Dependency directories (remove the comment below to include it)
-vendor/
-
-# Go workspace file
-go.work
-
-# Compiled Object files, Static and Dynamic libs (Shared Objects)
-*.o
-*.a
 *.so
+*.dylib
+*.test
+*.out
+*.prof
+vendor/
+go.work.sum
+*.go.sum.old
 
-# OS General
-Thumbs.db
-.DS_Store
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+dist/
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+.vuepress/dist/
+.serverless/
+.fusebox/
+.dynamodb/
+.tern-port/
+.vscode-test/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz/
+.pnp.*
 
-# project
-*.cert
-*.key
-*.log
-bin/
-
-# Develop tools
-.vscode/
+# IDE
 .idea/
+.vscode/
 *.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+.project
+.classpath
+.settings/
+*.iml
+*.ipr
+*.iws
+
+# Build outputs
+build/
+bin/
+obj/
+out/
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Kubernetes
+*.kubeconfig
+*.yaml.bak
+
+# Docker
+docker-compose.override.yml
+
+# Coverage
+coverage/
+coverage.txt
+cover.out
+cover.html
+
+# Profiling
+*.pprof
+*.prof
+*.trace
+*.snapshot
+
+# Go test cache
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+bin/

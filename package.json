@@ -1,0 +1,26 @@
+{
+  "name": "kratos-layout",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "lint": "pnpm -r lint",
+    "format": "pnpm -r format",
+    "gen": "pnpm -r gen",
+    "clean": "pnpm -r clean",
+    "prepare": "pnpm -r prepare",
+    "update": "pnpm -r update",
+    "dev": "pnpm -r dev",
+    "build": "pnpm -r build",
+    "help": "pnpm -r help"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.33.0",
+  "devDependencies": {
+    "@types/node": "^22.19.19",
+    "tsx": "^4.22.3"
+  }
+}

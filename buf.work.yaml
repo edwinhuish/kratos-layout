@@ -1,0 +1,4 @@
+version: v1
+directories:
+  - apps/api
+  - apps/backend

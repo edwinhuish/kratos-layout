@@ -1,0 +1,51 @@
+version: v2
+
+inputs:
+  - directory: proto
+
+managed:
+  enabled: true
+
+  disable:
+    - module: buf.build/googleapis/googleapis
+    - module: buf.build/envoyproxy/protoc-gen-validate
+    - module: buf.build/kratos/apis
+    - module: buf.build/gnostic/gnostic
+    - module: buf.build/gogo/protobuf
+
+plugins:
+  - local: protoc-gen-go
+    out: gen/go
+    opt:
+      - paths=source_relative
+
+  - local: protoc-gen-go-grpc
+    out: gen/go
+    opt:
+      - paths=source_relative
+
+  - local: protoc-gen-go-http
+    out: gen/go
+    opt:
+      - paths=source_relative
+
+  - local: protoc-gen-go-errors
+    out: gen/go
+    opt:
+      - paths=source_relative
+
+  - local: protoc-gen-openapi
+    out: gen/openapi
+    strategy: all
+    opt:
+      - default_response=false
+      - fq_schema_naming=true
+      - naming=json
+      - depth=2
+      - enum_type=string
+      - output_mode=merged
+
+  - local: protoc-gen-typescript-http
+    out: gen/ts
+    opt:
+      - paths=source_relative

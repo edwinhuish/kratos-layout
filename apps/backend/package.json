@@ -1,0 +1,21 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Kratos backend application",
+  "main": "index.js",
+  "scripts": {
+    "lint": "tsx scripts/lint.ts",
+    "format": "tsx scripts/format.ts",
+    "gen": "tsx scripts/generate.ts",
+    "clean": "tsx scripts/clean.ts",
+    "prepare": "tsx scripts/prepare.ts",
+    "update": "tsx scripts/update.ts",
+    "dev": "tsx scripts/dev.ts",
+    "build": "tsx scripts/build.ts",
+    "help": "tsx scripts/help.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.33.0"
+}
