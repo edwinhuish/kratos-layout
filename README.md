@@ -169,6 +169,109 @@ docker run --rm -p 8000:8000 -p 9000:9000 -v $(pwd)/configs:/data/conf kratos-ba
 3. 后端通过 Go Workspace 直接引用 `api/gen/go/` 下的生成代码
 4. 在 `apps/backend/internal/service/` 中实现服务逻辑
 
+## 添加前端项目
+
+所有应用统一放在 `apps/*` 下，`pnpm-workspace.yaml` 已配置 `apps/*` 路径，新增的前端项目会自动被 pnpm 识别。
+
+### 1. 初始化前端应用
+
+在 `apps/` 目录下使用脚手架创建前端项目：
+
+**Vite + React：**
+
+```bash
+cd apps
+pnpm create vite web --template react-ts
+cd web
+pnpm install
+```
+
+**Vite + Vue：**
+
+```bash
+cd apps
+pnpm create vite web --template vue-ts
+cd web
+pnpm install
+```
+
+**Next.js：**
+
+```bash
+cd apps
+pnpm create next-app@latest web --ts --app --src-dir --no-tailwind --import-alias "@/*"
+cd web
+pnpm install
+```
+
+创建完成后，确认 `package.json` 中的 `name` 字段使用 workspace 范围名（如 `@kratos/web`），便于内部引用：
+
+```json
+{
+  "name": "@kratos/web"
+}
+```
+
+### 2. 配置项目间内部依赖
+
+使用 pnpm 的 `workspace:*` 协议引用 workspace 内部的其他项目：
+
+```bash
+# 在前端应用中添加对 API 项目的依赖
+cd apps/web
+pnpm add @kratos/api@workspace:*
+```
+
+这会在 `apps/web/package.json` 中生成：
+
+```json
+{
+  "dependencies": {
+    "@kratos/api": "workspace:*"
+  }
+}
+```
+
+pnpm 会自动软链接到本地项目，修改被依赖项目的代码后前端应用实时生效。
+
+### 3. 引用 API 生成的 TypeScript 客户端
+
+`apps/api` 生成的 TypeScript HTTP 客户端（`gen/ts/`）可被前端项目直接引用。确保 `apps/api/package.json` 中配置了正确的 `exports`：
+
+```json
+{
+  "name": "@kratos/api",
+  "exports": {
+    "./ts/*": "./gen/ts/*"
+  }
+}
+```
+
+使用方式：
+
+```tsx
+import { createGreeterClient } from '@kratos/api/ts/helloworld/v1';
+
+const client = createGreeterClient('http://localhost:8000');
+const res = await client.sayHello({ name: 'World' });
+```
+
+### 4. 安装依赖与验证
+
+```bash
+# 回到项目根目录，安装所有工作区依赖
+pnpm install
+
+# 启动前端开发服务
+cd apps/web && pnpm dev
+
+# 构建前端项目
+cd apps/web && pnpm build
+
+# 构建全部
+pnpm -r build
+```
+
 ## 工具链
 
 所有 Go 工具预编译到 `bin/` 目录，由 `scripts/env.ts` 统一管理：
@@ -201,7 +304,7 @@ docker run --rm -p 8000:8000 -p 9000:9000 -v $(pwd)/configs:/data/conf kratos-ba
 
 ## 工作区配置
 
-- **pnpm workspace**（`pnpm-workspace.yaml`）：`apps/*` 下所有子应用
+- **pnpm workspace**（`pnpm-workspace.yaml`）：`apps/*` 下所有子应用（后端、API、前端等）
 - **Go workspace**（`go.work`）：`./apps/api` + `./apps/backend`，backend 可直接 import api 生成的 Go 代码
 - **Buf workspace**（`buf.work.yaml`）：统一管理两个 buf 模块
 
