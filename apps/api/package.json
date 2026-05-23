@@ -1,7 +1,11 @@
 {
   "name": "api",
   "version": "1.0.0",
+  "packageManager": "pnpm@10.33.0",
   "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
   "main": "index.js",
   "scripts": {
     "lint": "tsx scripts/lint.ts",
@@ -11,9 +15,5 @@
     "prepare": "tsx scripts/prepare.ts",
     "update": "tsx scripts/update.ts",
     "help": "tsx scripts/help.ts"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.33.0"
+  }
 }

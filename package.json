@@ -1,8 +1,12 @@
 {
   "name": "kratos-layout",
-  "version": "1.0.0",
-  "description": "",
   "type": "module",
+  "version": "1.0.0",
+  "packageManager": "pnpm@10.33.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
   "main": "index.js",
   "scripts": {
     "lint": "pnpm -r lint",
@@ -15,12 +19,11 @@
     "build": "pnpm -r build",
     "help": "pnpm -r help"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.33.0",
   "devDependencies": {
+    "@antfu/eslint-config": "^9.0.0",
     "@types/node": "^22.19.19",
-    "tsx": "^4.22.3"
+    "eslint": "^10.4.0",
+    "tsx": "^4.22.3",
+    "typescript-eslint": "^8.59.4"
   }
 }

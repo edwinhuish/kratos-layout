@@ -3,11 +3,13 @@
  * 提供命令执行和 Go 二进制安装的工具类
  */
 
-import { spawnSync, type SpawnSyncOptions } from "child_process";
-import path from "path";
-import fs from "fs";
-import { Logger } from "./logger";
-import { BIN_DIR } from "./const";
+import type { SpawnSyncOptions } from 'node:child_process';
+import type { Logger } from './logger';
+import { spawnSync } from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
+import process from 'node:process';
+import { BIN_DIR } from './const';
 
 /**
  * 命令执行工具类
@@ -31,26 +33,26 @@ class Command {
     const envPath = options.env?.PATH || process.env.PATH;
 
     const result = spawnSync(cmd, args, {
-      stdio: ["inherit", "pipe", "pipe"],
+      stdio: ['inherit', 'pipe', 'pipe'],
       ...options,
       env: { ...process.env, ...options.env, PATH: `${BIN_DIR}${path.delimiter}${envPath}` },
     });
 
     if (result.status !== 0) {
-      const errorMsg = result.stderr ? String(result.stderr).trim() : "";
+      const errorMsg = result.stderr ? String(result.stderr).trim() : '';
       throw new Error(
         `Command ${cmd} failed with exit code ${result.status}: ${errorMsg}`,
       );
     }
-  
-    return String((result.stderr || result.stdout || '')).trim();
+
+    return String(result.stderr || result.stdout || '').trim();
   }
 
   /**
    * 安装 Go 二进制工具
    */
   async installGoBin(name: string, pkg: string, forceInstall = false): Promise<void> {
-    if (name === "") {
+    if (name === '') {
       throw new Error(`Invalid package path: ${name}`);
     }
 
@@ -59,11 +61,12 @@ class Command {
         return;
       }
       this.logger.warn(`  FORCE Installing ${name}...`);
-    } else {
+    }
+    else {
       this.logger.info(`  Installing ${name}...`);
     }
 
-    this.runSync("go", ["install", pkg], { env: { GOBIN: BIN_DIR } });
+    this.runSync('go', ['install', pkg], { env: { GOBIN: BIN_DIR } });
   }
 }
 

@@ -1,21 +1,23 @@
+import process from 'node:process';
+
 /**
  * 日志工具模块
  * 提供带颜色输出的日志记录器，支持多种日志级别
  */
 
-const isCI = process.env.CI === "true";
+const isCI = process.env.CI === 'true';
 
 /**
  * 预定义颜色常量
  * CI 环境下颜色为空字符串，避免乱码
  */
 const COLORS = {
-  GREEN: isCI ? "" : "\x1b[1;32m",
-  RED: isCI ? "" : "\x1b[1;31m",
-  YELLOW: isCI ? "" : "\x1b[1;33m",
-  CYAN: isCI ? "" : "\x1b[1;36m",
-  PURPLE: isCI ? "" : "\x1b[1;35m",
-  RESET: isCI ? "" : "\x1b[0m",
+  GREEN: isCI ? '' : '\x1B[1;32m',
+  RED: isCI ? '' : '\x1B[1;31m',
+  YELLOW: isCI ? '' : '\x1B[1;33m',
+  CYAN: isCI ? '' : '\x1B[1;36m',
+  PURPLE: isCI ? '' : '\x1B[1;35m',
+  RESET: isCI ? '' : '\x1B[0m',
 };
 
 /**
@@ -25,13 +27,13 @@ const COLORS = {
  */
 class Logger {
   /** 日志前缀（命名空间） */
-  prefix: string;
+  private prefix: string;
 
   /**
    * 创建日志记录器实例
    */
   constructor(ns?: string) {
-    this.prefix = ns ? `[${ns}] ` : "";
+    this.prefix = ns ? `[${ns}] ` : '';
   }
 
   /**
