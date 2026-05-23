@@ -31,7 +31,7 @@ export function formatProto(): void {
 export function formatGo(): void {
   logger.info('Formatting Go files...');
   try {
-    cmd.runSync('golangci-lint', ['fix', './...']);
+    cmd.runSync('golangci-lint', ['fix', './...'], { stdio: 'inherit' });
     logger.success('Go files formatted');
   }
   catch (error) {

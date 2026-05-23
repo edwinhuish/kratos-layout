@@ -92,8 +92,7 @@ function genService(): void {
         logger.info(`Generating service file: s_${serviceName}.go (Version: ${version})`);
 
         try {
-          const output = cmd.runSync('kratos', ['proto', 'server', protoFile, '-t', serviceDir], { cwd: APP_DIR });
-          output && logger.debug(output);
+          cmd.runSync('kratos', ['proto', 'server', protoFile, '-t', serviceDir], { cwd: APP_DIR, stdio: 'inherit' });
         }
         catch (error) {
           logger.error(`Failed to generate service for ${protoFile}: ${(error as Error).message}`);

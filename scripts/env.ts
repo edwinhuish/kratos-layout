@@ -6,6 +6,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import { PassThrough } from 'node:stream';
 import { Command } from './cmd';
 import { BIN_DIR } from './const';
 import { Logger } from './logger';
@@ -165,8 +166,7 @@ export async function initEnv(logger = defaultLogger): Promise<void> {
     for (const { name, pkg } of GO_TOOLS) {
       try {
         logger.info(`安装 ${name}...`);
-        const output = cmd.runSync('go', ['install', pkg], { env: { GOBIN: BIN_DIR } });
-        output && logger.debug(output);
+        cmd.runSync('go', ['install', pkg], { env: { GOBIN: BIN_DIR } });
         logger.success(`${name} 安装成功`);
       }
       catch (error) {

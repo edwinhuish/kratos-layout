@@ -15,7 +15,7 @@ const args = process.argv.slice(2);
 logger.info('Running tests...');
 
 try {
-  cmd.runSync('go', ['test', '-v', ...args, './...']);
+  cmd.runSync('go', ['test', '-v', ...args, './...'], { stdio: 'inherit' });
   logger.success('All tests passed');
 }
 catch (error) {

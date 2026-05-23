@@ -39,7 +39,7 @@ function lintProto(): void {
 function lintGo(): void {
   logger.info('Linting Go files...');
   try {
-    cmd.runSync('golangci-lint', ['run', './...']);
+    cmd.runSync('golangci-lint', ['run', './...'], { stdio: 'inherit' });
     logger.success('Go lint passed');
   }
   catch (error) {

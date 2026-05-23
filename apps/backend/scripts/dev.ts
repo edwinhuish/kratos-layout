@@ -18,7 +18,7 @@ const cmd = new Command(logger);
 
 logger.info('Starting development server with hot reload...');
 try {
-  cmd.runSync('air', [], { cwd: APP_DIR });
+  cmd.runSync('air', [], { cwd: APP_DIR, stdio: 'inherit' });
 }
 catch (error) {
   logger.error(`air 启动失败: ${(error as Error).message}`);
