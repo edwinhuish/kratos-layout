@@ -17,6 +17,7 @@ const commands: Array<{ name: string; desc: string }> = [
   { name: 'update', desc: '更新 buf 依赖并升级 Go 模块到最新版本' },
   { name: 'dev', desc: '启动热重载开发服务器（使用 air）' },
   { name: 'build', desc: '编译 backend 应用为可执行文件' },
+  { name: 'test', desc: '运行测试（支持传递 go test 参数）' },
   { name: 'help', desc: '显示帮助信息' },
 ];
 
@@ -49,4 +50,6 @@ logger.info('  pnpm lint --fix    # 修复格式后检查');
 logger.info('  pnpm gen --service # 只生成 service 文件');
 logger.info('  pnpm dev           # 启动热重载开发服务器');
 logger.info('  pnpm build         # 编译应用');
+logger.info('  pnpm test          # 运行测试');
+logger.info('  pnpm test -race    # 运行竞态检测测试');
 logger.info('');

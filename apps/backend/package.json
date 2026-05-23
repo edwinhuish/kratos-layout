@@ -16,6 +16,7 @@
     "update": "tsx scripts/update.ts",
     "dev": "tsx scripts/dev.ts",
     "build": "tsx scripts/build.ts",
+    "test": "tsx scripts/test.ts",
     "help": "tsx scripts/help.ts"
   }
 }

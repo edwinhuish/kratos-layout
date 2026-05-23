@@ -103,6 +103,7 @@ pnpm prepare    # 初始化环境
 pnpm update     # 更新依赖
 pnpm dev        # 启动热重载开发服务
 pnpm build      # 编译项目
+pnpm test       # 运行测试
 pnpm help       # 查看帮助
 ```
 

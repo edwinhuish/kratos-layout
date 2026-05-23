@@ -17,6 +17,7 @@
     "update": "pnpm -r update",
     "dev": "pnpm -r dev",
     "build": "pnpm -r build",
+    "test": "pnpm -r test",
     "help": "pnpm -r help"
   },
   "devDependencies": {
